@@ -4,12 +4,14 @@ import { Outlet } from 'react-router-dom';
 
 const App = () => {
   return (
-    <>
-      <div className="bg-primary">
+    <div className='relative'>
+      <div className="bg-primary fixed top-0 w-full">
         <NavBar />
       </div>
-      <Outlet />
-    </>
+      <div className="w-full">
+        <Outlet />
+      </div>
+    </div>
   );
 };
 

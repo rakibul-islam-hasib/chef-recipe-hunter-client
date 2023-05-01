@@ -17,7 +17,7 @@ const NavBar = () => {
             </div>
             <div className="">
                 <ul className='flex justify-between gap-4'>
-                    {navbarData.map((item, index) => <li className='font-bold'><NavLink to={item.url}>{item.label}</NavLink></li>)}
+                    {navbarData.map((item, index) => <li key={index} className='font-bold'><NavLink to={item.url}>{item.label}</NavLink></li>)}
                 </ul>
             </div>
         </div>

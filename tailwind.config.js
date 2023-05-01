@@ -8,6 +8,9 @@ export default {
     extend: {
       colors: {
         'primary': '#2563eb',
+      }, 
+      backgroundImage : { 
+        'hero-pattern': 'url("./src/assets/img2.jpg")',
       }
     },
   },
