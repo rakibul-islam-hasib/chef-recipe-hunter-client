@@ -1,10 +1,15 @@
 import React from 'react';
+import NavBar from './components/headers/NavBar';
+import { Outlet } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div>
-      <h1>hello from home</h1>
-    </div>
+    <>
+      <div className="bg-primary">
+        <NavBar />
+      </div>
+      <Outlet />
+    </>
   );
 };
 
