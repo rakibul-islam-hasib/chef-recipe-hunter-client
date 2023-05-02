@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../headers/Hero';
+import TimeLine from './TimeLine';
 
 const Home = () => {
     return (
@@ -8,6 +9,9 @@ const Home = () => {
                <div className="h-screen bg-black bg-opacity-75">
                     <Hero />
                </div>
+            </div>
+            <div className="">
+                <TimeLine />
             </div>
         </>
     );

@@ -31,8 +31,8 @@ const NavBar = () => {
                     {navbarData.map((item, index) => <li key={index} className='font-bold'><NavLink to={item.url}>{item.label}</NavLink></li>)}
                     <li className=''>
                         {
-                            isLogin ? <button onClick={() => navigate('/register')} className='bg-secondary px-5 py-2 rounded-full '>Register</button> :
-                                <button onClick={() => navigate('/login')} className='bg-secondary px-5 py-2 rounded-full '>Login</button>
+                            isLogin ? <button onClick={() => navigate('/register')} className='bg-primary px-5 py-2 rounded-full '>Register</button> :
+                                <button onClick={() => navigate('/login')} className='bg-primary px-5 py-2 rounded-full '>Login</button>
                         }
                     </li>
                 </ul>
