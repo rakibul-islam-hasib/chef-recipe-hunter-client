@@ -9,6 +9,7 @@ export default {
       colors: {
         'primary': '#2AAFC0',
         'secondary': '#F76FC1',
+        'tertiary': '#F76FC1',
       }, 
       backgroundImage : { 
         'hero-pattern': 'url("./src/assets/img2.jpg")',

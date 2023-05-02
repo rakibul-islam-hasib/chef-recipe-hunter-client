@@ -1,6 +1,8 @@
 import React from 'react';
 import Hero from '../headers/Hero';
 import TimeLine from './TimeLine';
+import ChefAbout from './ChefAbout';
+import Category from './Category';
 
 const Home = () => {
     return (
@@ -10,8 +12,12 @@ const Home = () => {
                     <Hero />
                </div>
             </div>
+            <div className="my-14">
+                {/* <TimeLine /> */}
+                <ChefAbout />
+            </div>
             <div className="">
-                <TimeLine />
+                <Category /> 
             </div>
         </>
     );
