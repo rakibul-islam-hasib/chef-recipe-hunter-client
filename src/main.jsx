@@ -7,6 +7,7 @@ import Home from './components/home/home.jsx'
 import Login from './components/user/Login.jsx'
 import Register from './components/user/Register.jsx'
 import AuthProviders from './providers/AuthProviders.jsx'
+import Recipes from './components/home/cooking/Recipes.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      {path : 'chef/:id', element : <h1>chef</h1>}
+      {path : 'chef/:id', element : <Recipes />}
     ]
   }
 ])
