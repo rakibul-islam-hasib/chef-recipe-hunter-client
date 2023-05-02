@@ -3,16 +3,21 @@ import google from '../../assets/search.png';
 import github from '../../assets/github.png';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
+import { FadeLoader } from 'react-spinners'
+
+
 const Register = () => {
     const [error, setError] = useState('');
-    const { register } = useContext(AuthContext);
+    const { register , update } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
     const handelFormSubmit = e => {
         setLoading(true);
         e.preventDefault();
+        setError('');
         let form = e.target;
         let name = form.name.value;
         let email = form.email.value;
+        let photo = form.photo.value;
         let password = form.password.value;
         if (password.length < 6) {
             setError('Password must be at least 6 characters long');
@@ -20,15 +25,20 @@ const Register = () => {
         }
         register(email, password)
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
+                update(photo, name).then(()=>{})
+                .catch(err=>console.log(err.code))
+                setLoading(false);
             })
             .catch(err => {
                 console.log(err)
+                setError(err.code);
+                setLoading(false);
             })
     }
     return (
-        loading ? <div className="">
-            
+        loading ? <div className="h-screen flex justify-center items-center">
+            <FadeLoader color="#36d7b7" />
         </div> :
             <div className='h-screen flex flex-col md:flex-row md:w-[70%] w-full  mx-auto justify-center items-center'>
                 <div className="mb-6">
@@ -64,8 +74,8 @@ const Register = () => {
                                     <label htmlFor="email" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Email Address</label>
                                 </div>
                                 <div className="relative mt-6">
-                                    <input type="text" name="Photo_URL" placeholder="Photo URL" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
-                                    <label htmlFor="Photo_URL" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Photo URL</label>
+                                    <input type="text" name="photo" placeholder="Photo URL" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                    <label htmlFor="photo" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Photo URL</label>
                                 </div>
                                 <div className="relative mt-6">
                                     <input required type="password" name="password" id="password" placeholder="Password" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
