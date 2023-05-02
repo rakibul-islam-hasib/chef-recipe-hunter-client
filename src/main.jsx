@@ -8,7 +8,7 @@ import Login from './components/user/Login.jsx'
 import Register from './components/user/Register.jsx'
 import AuthProviders from './providers/AuthProviders.jsx'
 import Recipes from './components/home/cooking/Recipes.jsx'
-
+import 'react-tooltip/dist/react-tooltip.css'
 const router = createBrowserRouter([
   {
     path: '/',

@@ -7,6 +7,7 @@ import { MoonLoader } from 'react-spinners'
 export const AuthContext = createContext(null); // Create a context object
 const AuthProviders = ({ children }) => {
     const [loader, setLoader] = useState(true);
+    const [user, setUser] = useState(null); // [1]
     const auth = getAuth(app);
     const register = (email, password) => {
         setLoader(true);
@@ -30,11 +31,16 @@ const AuthProviders = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             // console.log(user)
+            if (user) {
+                setUser(user);
+            } else {
+                setUser(null);
+            }
             setLoader(false);
         })
         return () => unsubscribe();
     }, [])
-    const providerValue = { register, update, login, googleLogin  , githubLogin}
+    const providerValue = { register, update, login, googleLogin, githubLogin , user}
     if (loader) {
         return <div className="h-screen flex justify-center items-center">
             <MoonLoader color="#36d7b7" />
