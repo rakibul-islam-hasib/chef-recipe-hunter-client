@@ -3,6 +3,7 @@ import Hero from '../headers/Hero';
 import TimeLine from './TimeLine';
 import ChefAbout from './ChefAbout';
 import Category from './Category';
+import Chef from './cooking/Chef';
 
 const Home = () => {
     return (
@@ -18,6 +19,9 @@ const Home = () => {
             </div>
             <div className="">
                 <Category /> 
+            </div>
+            <div className="">
+                <Chef />
             </div>
         </>
     );
