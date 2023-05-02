@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './components/headers/NavBar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 
 const App = () => {
   const [navBackground, setNavBackground] = useState('bg-[#5A6169]'); // Initial background color of the nav element
-
+  const location = useLocation();
+  const [isLogin, setIsLogin] = useState(false);
+  const pathName = location.pathname;
+  useEffect(() => {
+    if (location.pathname === '/login' || location.pathname === '/register') {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [pathName])
   useEffect(() => {
     const handleScroll = () => {
       const position = window.pageYOffset;
@@ -21,7 +30,7 @@ const App = () => {
   }, []);
   return (
     <div className='relative'>
-      <div className={`${navBackground} z-20 fixed top-0 w-full`}>
+      <div className={`${navBackground} ${isLogin && 'bg-black'} z-20 fixed top-0 w-full`}>
         <NavBar />
       </div>
       <div className="w-full">
