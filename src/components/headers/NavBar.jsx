@@ -15,8 +15,15 @@ const NavBar = () => {
     const location = useLocation();
     const [isLogin, setIsLogin] = useState(false);
     const pathName = location.pathname;
-    const { user } = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
     // console.log(user.photoURL)
+    const logOutHandler = () => {
+        logOut()
+            .then(() => { })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
     useEffect(() => {
         if (location.pathname === '/login') {
             setIsLogin(true);
@@ -24,6 +31,7 @@ const NavBar = () => {
             setIsLogin(false);
         }
     }, [pathName])
+    // console.log(user.photoURL)
     return (
         <div className='w-[90%] flex justify-between text-white items-center py-4 mx-auto'>
             <div className="">
@@ -33,14 +41,42 @@ const NavBar = () => {
                 <ul className='flex items-center justify-between gap-4'>
                     {navbarData.map((item, index) => <li key={index} className='font-bold'><NavLink to={item.url}>{item.label}</NavLink></li>)}
                     <li className=''>
-                        {
-                            user ?
-                                <div className="">
-                                    <img data-tooltip-variant="success" data-tooltip-id="my-tooltip" data-tooltip-content={`${user.displayName}`} className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
-                                </div>
+                        {user ?
+                            <div className="flex items-center gap-6">
+                                {user?.photoURL && (
+                                    <img
+                                        data-tooltip-variant="success"
+                                        data-tooltip-id="my-tooltip"
+                                        data-tooltip-content={user?.displayName}
+                                        className="w-10 h-10 rounded-full"
+                                        src={user?.photoURL}
+                                        alt=""
+                                    />
+                                )}
+                                <img
+                                    onClick={logOutHandler}
+                                    data-tooltip-variant="error"
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-content="Logout"
+                                    className="w-[30px] h-[30px]"
+                                    src="https://i.ibb.co/NYmMySM/switch.png"
+                                    alt="Logout"
+                                />
+                            </div>
+                            : isLogin ?
+                                <button
+                                    onClick={() => navigate("/register")}
+                                    className="bg-primary px-5 py-2 rounded-full"
+                                >
+                                    Register
+                                </button>
                                 :
-                                isLogin ? <button onClick={() => navigate('/register')} className='bg-primary px-5 py-2 rounded-full '>Register</button> :
-                                    <button onClick={() => navigate('/login')} className='bg-primary px-5 py-2 rounded-full '>Login</button>
+                                <button
+                                    onClick={() => navigate("/login")}
+                                    className="bg-primary px-5 py-2 rounded-full"
+                                >
+                                    Login
+                                </button>
                         }
                     </li>
                 </ul>

@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, updateProfile } from 'firebase/auth';
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { app } from '../firebase/firebase.init';
 import { MoonLoader } from 'react-spinners'
 
@@ -28,6 +28,9 @@ const AuthProviders = ({ children }) => {
     const githubLogin = () => {
         return signInWithPopup(auth, githubProvider);
     }
+    const logOut = ()=> { 
+        return signOut(auth);
+    }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
             // console.log(user)
@@ -40,7 +43,7 @@ const AuthProviders = ({ children }) => {
         })
         return () => unsubscribe();
     }, [])
-    const providerValue = { register, update, login, googleLogin, githubLogin , user}
+    const providerValue = { register, update, login, googleLogin, githubLogin , user , logOut}
     if (loader) {
         return <div className="h-screen flex justify-center items-center">
             <MoonLoader color="#36d7b7" />
