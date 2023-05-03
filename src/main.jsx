@@ -9,10 +9,12 @@ import Register from './components/user/Register.jsx'
 import AuthProviders from './providers/AuthProviders.jsx'
 import Recipes from './components/home/cooking/Recipes.jsx'
 import 'react-tooltip/dist/react-tooltip.css'
+import ErrorPage from './components/shared/ErrorPage.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement : <ErrorPage />,
     children: [
       { path: '/', element: <Home /> },
       { path: 'login', element: <Login /> },
