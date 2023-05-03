@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import { Tooltip } from 'react-tooltip';
 const navbarData = [
@@ -35,11 +35,13 @@ const NavBar = () => {
     return (
         <div className='w-[90%] flex justify-between text-white items-center py-4 mx-auto'>
             <div className="">
-                <h1 className='text-4xl font-bold' >Amber Chefs</h1>
+                <h1 className='text-4xl font-bold' ><Link to='/'>Amber Chefs</Link></h1>
             </div>
             <div className="hidden md:block">
                 <ul className='flex items-center justify-between gap-4'>
-                    {navbarData.map((item, index) => <li key={index} className='font-bold'><NavLink to={item.url}>{item.label}</NavLink></li>)}
+                    {navbarData.map((item, index) => <li key={index} className='font-bold hover:text-red-500 duration-300'>
+                        <NavLink to={item.url}>{item.label}</NavLink>
+                    </li>)}
                     <li className=''>
                         {user ?
                             <div className="flex items-center gap-6">

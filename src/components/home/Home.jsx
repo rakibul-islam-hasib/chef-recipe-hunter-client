@@ -23,6 +23,9 @@ const Home = () => {
             <div className="">
                 <Chef />
             </div>
+            <div className="">
+                {/* <TimeLine /> */}
+            </div>
         </>
     );
 };

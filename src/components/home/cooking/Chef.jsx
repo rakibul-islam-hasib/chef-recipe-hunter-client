@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoad } from 'react-lazyload';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const Chef = () => {
     const [chefData, setChefData] = useState([]);
     const navigate = useNavigate();
@@ -16,15 +19,22 @@ const Chef = () => {
             <div className="w-[70%] mx-auto text-center my-4">
                 <p>Simple and tasty recipes are dishes that are easy to prepare and have a delicious taste. They are ideal for individuals with busy schedules or those who are new to cooking.</p>
             </div>
-            <div className="w-[80%] mx-auto gap-8 grid md:grid-cols-2   lg:grid-cols-3">
+            <div className="w-[80%] md:mt-12 mx-auto gap-8 grid md:grid-cols-2   lg:grid-cols-3">
                 {
                     chefData.map((data, i) => <div
-                    key={i}
+                        key={i}
                         style={{ background: 'linear-gradient(180deg, rgba(231, 249, 253, 0) 0%, #E7F9FD 100%)' }}
-                        className="p-4 max-w-lg border cursor-pointer border-indigo-300 rounded-2xl hover:shadow-xl duration-200 flex flex-col items-center"
+                        className="p-4 hover:-translate-y-2 max-w-lg border cursor-pointer border-indigo-300 rounded-2xl hover:shadow-xl duration-100 flex flex-col items-center"
                     >
                         {/* <img src={data.img} className="shadow h-[200px] w-full rounded-lg overflow-hidden border" /> */}
-                        <LazyLoadImage src={data.img} className='shadow h-[200px] w-full rounded-lg overflow-hidden border'/>
+                        <LazyLoadImage
+                            delayTime={10000}
+                            effect='blur'
+                            src={data.img}
+                            className="shadow h-[200px] w-full rounded-lg overflow-hidden border" /> 
+                     
+
+
                         <div className="mt-auto">
                             <h4 className="font-bold text-center my-4 text-xl">{data.name}</h4>
                             <div className="text-left">
@@ -45,8 +55,8 @@ const Chef = () => {
                             <div className="mt-5 flex justify-center">
                                 <button
                                     onClick={() => navigate(`/chef/${data._id}`)}
-                                type="button"
-                                className="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"> View Recipes</button>
+                                    type="button"
+                                    className="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"> View Recipes</button>
                             </div>
                         </div>
                     </div>
