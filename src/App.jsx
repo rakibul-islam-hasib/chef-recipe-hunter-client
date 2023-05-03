@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NavBar from './components/headers/NavBar';
 import { Outlet, useLocation } from 'react-router-dom';
 import Footer from './components/shared/Footer';
+import Scroll from './hooks/scroll';
 
 const App = () => {
   const [navBackground, setNavBackground] = useState('bg-[#5A6169]'); // Initial background color of the nav element
@@ -40,6 +41,7 @@ const App = () => {
       <div className="w-full">
         <Footer /> {/* Footer component */}
       </div>
+      <Scroll /> {/* Scroll component */}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 const Chef = () => {
     const [chefData, setChefData] = useState([]);
     const navigate = useNavigate();
@@ -22,7 +23,8 @@ const Chef = () => {
                         style={{ background: 'linear-gradient(180deg, rgba(231, 249, 253, 0) 0%, #E7F9FD 100%)' }}
                         className="p-4 max-w-lg border cursor-pointer border-indigo-300 rounded-2xl hover:shadow-xl duration-200 flex flex-col items-center"
                     >
-                        <img src={data.img} className="shadow h-[200px] w-full rounded-lg overflow-hidden border" />
+                        {/* <img src={data.img} className="shadow h-[200px] w-full rounded-lg overflow-hidden border" /> */}
+                        <LazyLoadImage src={data.img} className='shadow h-[200px] w-full rounded-lg overflow-hidden border'/>
                         <div className="mt-auto">
                             <h4 className="font-bold text-center my-4 text-xl">{data.name}</h4>
                             <div className="text-left">
