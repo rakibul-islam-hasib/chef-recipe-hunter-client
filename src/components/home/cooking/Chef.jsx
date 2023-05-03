@@ -40,8 +40,9 @@ const Chef = () => {
                             <div className="text-left">
                                 <span className="inline-flex items-center gap-4">
                                     <img className='h-[15px] w-[15px]' src="https://i.ibb.co/Dg7wrtT/cook-book.png" alt="" />
-                                    <p>Total Recipes : {data.num_recipes}</p>
+                                    <p>Total Recipes : {data?.recipes?.length}</p>
                                 </span>
+                                <br />
                                 <span className="inline-flex items-center gap-4">
                                     <img className='h-[15px] w-[15px]' src="https://i.ibb.co/PQZspx3/safety.png" alt="" />
                                     <p>{data.years_of_experience} Year Experience</p>

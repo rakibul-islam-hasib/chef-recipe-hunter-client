@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { formatNumber } from '../../../utilities/NumberFormate';
+import { formatNumber } from '../../utilities/NumberFormate';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { FcApproval } from 'react-icons/fc';
+import { Tooltip } from 'react-tooltip';
 
 const Recipes = () => {
     const { id } = useParams();
@@ -13,20 +15,23 @@ const Recipes = () => {
             .catch(err => console.log(err))
     }, [])
     // console.log(chef)
-    const { name, img, num_recipes, years_of_experience, likes, recipes, description } = chef;
+    const { name, img, num_recipes, years_of_experience, likes, recipes, description, verify } = chef;
     return (
         <>
-            <div className="h-screendf">
+            <div className="h-screen">
                 <section className="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     <div
-                    className="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
+                        className="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row">
                         <div
-                         className="sm:text-center lg:text-left">
-                            <h1
-                             className="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
-                                <span
-                                 className="block text-indigo-600 xl:inline">{name}</span>
+                            className="sm:text-center lg:text-left">
+                            <h1 className="text-4xl tracking-tight inline-flex items-center gap-3 font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
+                                <span className=" text-indigo-600 inline-flex items-center xl:inline">{name}</span>
+                                {verify && <span
+                                    data-tooltip-variant="info"
+                                    data-tooltip-id="my-tooltip"
+                                    data-tooltip-place="top"
+                                    data-tooltip-content="Verified" className='text-2xl md:text-3xl inline'><FcApproval /></span>}
                             </h1>
                             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                                 {description}
@@ -70,7 +75,7 @@ const Recipes = () => {
 
                     {
                         recipes?.map((recipe, i) => {
-                        
+
                             return (
                                 <li key={i} className="relative border  p-2 rounded-xl h-full flex flex-col sm:flex-row xl:flex-col items-start">
                                     <div className="order-1 sm:ml-6 xl:ml-0">
@@ -102,6 +107,7 @@ const Recipes = () => {
                     }
                 </ul>
             </div>
+            <Tooltip float={true} place='top' id="my-tooltip" />
         </>
     );
 };

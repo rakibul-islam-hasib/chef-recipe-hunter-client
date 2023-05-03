@@ -7,10 +7,11 @@ import Home from './components/home/home.jsx'
 import Login from './components/user/Login.jsx'
 import Register from './components/user/Register.jsx'
 import AuthProviders from './providers/AuthProviders.jsx'
-import Recipes from './components/home/cooking/Recipes.jsx'
+
 import 'react-tooltip/dist/react-tooltip.css'
 import ErrorPage from './components/shared/ErrorPage.jsx'
 import Privet from './hooks/Privet.jsx'
+import Recipes from './components/shared/Recipes.jsx'
 // import 'sweetalert2/src/sweetalert2.scss'
 const router = createBrowserRouter([
   {
