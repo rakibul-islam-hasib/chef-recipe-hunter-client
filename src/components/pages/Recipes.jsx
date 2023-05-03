@@ -4,16 +4,26 @@ import { formatNumber } from '../../utilities/NumberFormate';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FcApproval } from 'react-icons/fc';
 import { Tooltip } from 'react-tooltip';
+import ReactStars from "react-rating-stars-component";
+import {toast} from 'react-hot-toast';
 
 const Recipes = () => {
     const { id } = useParams();
     const [chef, setChef] = useState({});
+    const [favorite, setFavorite] = useState(false);
+    const [favorites, setFavorites] = useState([]);
+
+
     useEffect(() => {
         fetch(`https://amber-chef-codewithhasib.vercel.app/api/chefs/${id}`)
             .then(res => res.json())
             .then(data => setChef(data))
             .catch(err => console.log(err))
     }, [])
+    const handleFavoriteClick = (recipeId) => {
+        toast.success('Successfully added!')
+        setFavorites([...favorites, recipeId]);
+    };
     // console.log(chef)
     const { name, img, num_recipes, years_of_experience, likes, recipes, description, verify } = chef;
     return (
@@ -75,13 +85,13 @@ const Recipes = () => {
 
                     {
                         recipes?.map((recipe, i) => {
-
+                            const ratings = Number(recipe?.ratings);
                             return (
                                 <li key={i} className="relative border  p-2 rounded-xl h-full flex flex-col sm:flex-row xl:flex-col items-start">
                                     <div className="order-1 flex flex-col sm:ml-6 xl:ml-0">
                                         <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
                                             <span className="mb-1 block text-sm leading-6 text-indigo-500">{recipe?.name}</span></h3>
-                                        <div className=" text-slate-600 flex flex-col justify-between ">
+                                        <div className=" text-slate-600 mb-5 flex flex-col justify-between ">
                                             <span className='flex justify-between flex-col '>
                                                 <span className='block font-bold'>Ingredients</span>
                                                 {/* <span className='block'>{ingredients}</span> */}
@@ -94,10 +104,25 @@ const Recipes = () => {
                                             </span>
                                             <div className='block mt-auto'>{recipe?.instructions}</div>
                                         </div>
-                                        <div className="">
-                                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                                                {recipe?.ratings}
-                                            </span>
+                                        <div className="absolute mt-5 bottom-1">
+                                            <div className="flex justify-between items-center">
+                                                <span>
+                                                    <ReactStars
+                                                        count={5}
+                                                        value={ratings}
+                                                        size={24}
+                                                    />
+                                                </span>
+                                                <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                                                    {recipe?.ratings}
+                                                </span>
+                                                <span>
+                                                    {favorites.find(favorite => favorite === recipe.id)
+                                                        ? <button disabled={true} className='px-3 py-1 bg-blue-500 text-white ml-4 rounded-full'>Favorite</button>
+                                                        : <button disabled={false} onClick={() => handleFavoriteClick(recipe.id)} className='px-3 py-1 bg-blue-600 text-white ml-4 rounded-full'>Favorite</button>
+                                                    }
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
 

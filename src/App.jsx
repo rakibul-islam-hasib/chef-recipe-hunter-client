@@ -3,7 +3,7 @@ import NavBar from './components/headers/NavBar';
 import { Outlet, useLocation } from 'react-router-dom';
 import Scroll from './hooks/scroll';
 import Footer from './components/pages/shared/Footer';
-
+import { Toaster } from 'react-hot-toast';
 const App = () => {
   const [navBackground, setNavBackground] = useState('bg-[#5A6169]'); // Initial background color of the nav element
   const location = useLocation();
@@ -39,9 +39,10 @@ const App = () => {
         <Outlet />
       </div>
       <div className="w-full">
-        <Footer /> {/* Footer component */}
+        <Footer /> 
       </div>
-      <Scroll /> {/* Scroll component */}
+      <Scroll /> 
+      <Toaster /> 
     </div>
   );
 };
