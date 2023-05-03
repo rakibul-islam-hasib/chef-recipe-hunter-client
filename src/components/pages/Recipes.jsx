@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { formatNumber } from '../../../utilities/NumberFormate';
+import { formatNumber } from '../../utilities/NumberFormate';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FcApproval } from 'react-icons/fc';
 import { Tooltip } from 'react-tooltip';
@@ -36,7 +36,7 @@ const Recipes = () => {
                             <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                                 {description}
                                 <span className='block text-primary text-2xl font-bold text-center my-5'>
-                                    <span className='text-black'>Total :</span>{num_recipes} Recipes</span>
+                                    <span className='text-black'>Total : &nbsp;</span>{recipes?.length} Recipes</span>
                             </p>
                             {/* <!-- Button Section --> */}
                             <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -78,7 +78,7 @@ const Recipes = () => {
 
                             return (
                                 <li key={i} className="relative border  p-2 rounded-xl h-full flex flex-col sm:flex-row xl:flex-col items-start">
-                                    <div className="order-1 sm:ml-6 xl:ml-0">
+                                    <div className="order-1 flex flex-col sm:ml-6 xl:ml-0">
                                         <h3 className="mb-1 text-slate-900 font-semibold dark:text-slate-200">
                                             <span className="mb-1 block text-sm leading-6 text-indigo-500">{recipe?.name}</span></h3>
                                         <div className=" text-slate-600 flex flex-col justify-between ">
@@ -94,7 +94,11 @@ const Recipes = () => {
                                             </span>
                                             <div className='block mt-auto'>{recipe?.instructions}</div>
                                         </div>
-
+                                        <div className="">
+                                            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+                                                {recipe?.ratings}
+                                            </span>
+                                        </div>
                                     </div>
 
                                     {/* <img src={recipe?.image} alt="" /> */}

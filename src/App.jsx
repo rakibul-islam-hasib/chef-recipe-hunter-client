@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from './components/headers/NavBar';
 import { Outlet, useLocation } from 'react-router-dom';
-import Footer from './components/shared/Footer';
 import Scroll from './hooks/scroll';
+import Footer from './components/pages/shared/Footer';
 
 const App = () => {
   const [navBackground, setNavBackground] = useState('bg-[#5A6169]'); // Initial background color of the nav element

@@ -20,8 +20,8 @@ const Features = () => {
         {
             id: 3,
             icon: star,
-            title: 'Places',
-            count: '46'
+            title: 'Ratings',
+            count: '4.6'
         },
         {
             id: 4,
@@ -31,17 +31,17 @@ const Features = () => {
         }
     ]
     return (
-        <section class="text-gray-700 w-[90%] mx-auto">
-            <div class="container px-5 py-24 mx-auto">
+        <section className="text-gray-700 w-[90%] mx-auto">
+            <div className="container px-5 py-24 mx-auto">
 
-                <div class="flex flex-wrap -m-4 text-center">
+                <div className="flex flex-wrap -m-4 text-center">
                     {
-                        data.map(item => <div key={item.id} class="p-4 md:w-1/4 sm:w-1/2 w-full">
-                            <div class="border-2 border-primary cursor-pointer px-4 py-6 rounded-lg transform transition duration-300 hover:scale-105">
+                        data.map(item => <div key={item.id} className="p-4 md:w-1/4 sm:w-1/2 w-full">
+                            <div className="border-2 border-primary cursor-pointer px-4 py-6 rounded-lg transform transition duration-300 hover:scale-105">
 
                                 <img src={item.icon} alt="" className="w-12 h-12 mb-3 inline-block" />
-                                <h2 class="title-font font-medium text-3xl text-gray-900">{item.count}</h2>
-                                <p class="leading-relaxed">{item.title}</p>
+                                <h2 className="title-font font-medium text-3xl text-gray-900">{item.count}</h2>
+                                <p className="leading-relaxed">{item.title}</p>
                             </div>
                         </div>)
                     }
