@@ -1,8 +1,8 @@
 import React from 'react';
-import NavBar from '../headers/NavBar';
-import errorImg from '../../assets/404error.gif'
+import errorImg from '../../../assets/404error.gif'
 import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
+import NavBar from '../../headers/NavBar';
 const ErrorPage = () => {
     const navigate = useNavigate(); 
     return (

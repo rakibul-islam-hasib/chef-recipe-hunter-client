@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { formatNumber } from '../../utilities/NumberFormate';
+import { formatNumber } from '../../../utilities/NumberFormate';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { FcApproval } from 'react-icons/fc';
 import { Tooltip } from 'react-tooltip';
