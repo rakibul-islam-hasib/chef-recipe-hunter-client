@@ -1,14 +1,18 @@
 import React, { useContext, useState } from 'react';
 import google from '../../assets/search.png';
 import github from '../../assets/github.png';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
 import { FadeLoader } from 'react-spinners'
 
 
 const Register = () => {
     const [error, setError] = useState('');
-    const { register , update } = useContext(AuthContext);
+    const { register , update , user } = useContext(AuthContext);
+    console.log(user)
+    const location = useLocation();
+    const redirect = location?.state?.from || '/';
+    const navigate = useNavigate(); 
     const [loading, setLoading] = useState(false);
     const handelFormSubmit = e => {
         setLoading(true);
@@ -28,6 +32,7 @@ const Register = () => {
                 // console.log(result.user);
                 update(photo, name).then(()=>{})
                 .catch(err=>console.log(err.code))
+                navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
@@ -35,6 +40,9 @@ const Register = () => {
                 setError(err.code);
                 setLoading(false);
             })
+    }
+    if(user){
+        return <Navigate to="/" replace state={{from : location.pathname}} />;
     }
     return (
         loading ? <div className="h-screen flex justify-center items-center">

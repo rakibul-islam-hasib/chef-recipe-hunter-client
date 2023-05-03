@@ -21,6 +21,7 @@
     "react-tilt": "^1.0.2",
     "react-tooltip": "^5.11.1",
     "react-vertical-timeline-component": "^3.6.0",
+    "sweetalert2": "^11.7.3",
     "swiper": "^9.2.4"
   },
   "devDependencies": {

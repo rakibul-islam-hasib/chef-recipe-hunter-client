@@ -11,6 +11,7 @@ import Recipes from './components/home/cooking/Recipes.jsx'
 import 'react-tooltip/dist/react-tooltip.css'
 import ErrorPage from './components/shared/ErrorPage.jsx'
 import Privet from './hooks/Privet.jsx'
+// import 'sweetalert2/src/sweetalert2.scss'
 const router = createBrowserRouter([
   {
     path: '/',
