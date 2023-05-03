@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import google from '../../assets/search.png';
 import github from '../../assets/github.png';
 import { AuthContext } from '../../providers/AuthProviders';
@@ -7,6 +7,10 @@ import { FadeLoader } from 'react-spinners'
 
 const Login = () => {
     const { login, googleLogin, githubLogin } = useContext(AuthContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    const redirect = location?.state?.from || '/';
+    
     const [loading, setLoading] = useState(false);
     const handelFormSubmit = e => {
         setLoading(true);
@@ -17,6 +21,7 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 console.log(result.user);
+                navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
@@ -28,7 +33,8 @@ const Login = () => {
         setLoading(true);
         googleLogin()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
+                navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
@@ -40,7 +46,8 @@ const Login = () => {
         setLoading(true);
         githubLogin()
             .then(result => {
-                console.log(result.user);
+                // console.log(result.user);
+                navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
