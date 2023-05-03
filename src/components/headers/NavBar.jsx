@@ -40,7 +40,7 @@ const NavBar = () => {
             <div className="hidden md:block">
                 <ul className='flex items-center justify-between gap-4'>
                     {navbarData.map((item, index) => <li key={index} className='font-bold hover:text-red-500 duration-300'>
-                        <NavLink className={({isActive})=> isActive  && 'active-link'} to={item.url}>{item.label}</NavLink>
+                        <NavLink className={({isActive})=> isActive ? 'active-link' : ''} to={item.url}>{item.label}</NavLink>
                     </li>)}
                     <li className=''>
                         {user ?

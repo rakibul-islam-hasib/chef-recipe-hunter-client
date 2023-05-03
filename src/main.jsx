@@ -10,6 +10,7 @@ import AuthProviders from './providers/AuthProviders.jsx'
 import Recipes from './components/home/cooking/Recipes.jsx'
 import 'react-tooltip/dist/react-tooltip.css'
 import ErrorPage from './components/shared/ErrorPage.jsx'
+import Privet from './hooks/Privet.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      {path : 'chef/:id', element : <Recipes />}
+      {path : 'chef/:id', element : <Privet><Recipes /></Privet>}
     ]
   }
 ])
