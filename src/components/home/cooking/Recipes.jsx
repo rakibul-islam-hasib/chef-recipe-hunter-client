@@ -63,7 +63,8 @@ const Recipes = () => {
             </div>
             <div className="w-[80%] mx-auto">
                 <div className="">
-                    <h1 className='text-5xl text-center font-bold'>Recipes From <span className='text-primary'>This Chef</span></h1>
+                    <h1 className='text-5xl text-center font-sans font-bold'>Recipes From <span className='text-primary'>{name}</span></h1>
+                    <p className='text-center my-4'>Explore our collection of mouthwatering dishes today and find your next favorite recipe...!</p>
                 </div>
                 <ul className="grid grid-cols-1 xl:grid-cols-3 gap-y-10 gap-x-6 items-start p-8">
 
