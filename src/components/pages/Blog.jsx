@@ -1,9 +1,9 @@
 import React, { createRef } from 'react';
 import blogImg from '../../assets/blog.jpg'
-// import Pdf from "react-to-pdf";
+import Pdf from "react-to-pdf";
 import { FcTimeline } from 'react-icons/fc';
 import TimeLine from './shared/TimeLine';
-import { Document, Page } from 'react-pdf';
+
 const Blog = () => {
     const ref = createRef();
 
