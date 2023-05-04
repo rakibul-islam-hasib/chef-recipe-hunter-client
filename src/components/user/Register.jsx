@@ -9,7 +9,7 @@ import { FadeLoader } from 'react-spinners'
 const Register = () => {
     const [error, setError] = useState('');
     const { register , update , user } = useContext(AuthContext);
-    console.log(user)
+    
     const location = useLocation();
     const redirect = location?.state?.from || '/';
     const navigate = useNavigate(); 
@@ -25,6 +25,7 @@ const Register = () => {
         let password = form.password.value;
         if (password.length < 6) {
             setError('Password must be at least 6 characters long');
+            setLoading(false);
             return;
         }
         register(email, password)
@@ -48,7 +49,7 @@ const Register = () => {
         loading ? <div className="h-screen flex justify-center items-center">
             <FadeLoader color="#36d7b7" />
         </div> :
-            <div className='h-screen flex flex-col md:flex-row md:w-[70%] w-full  mx-auto justify-center items-center'>
+            <div className='lg:h-screen sm:mb-10 flex flex-col md:flex-row md:w-[70%] w-full  mx-auto justify-center items-center'>
                 <div className="mb-6">
                     <h1 className='text-4xl tracking-wider  font-bold'>Create your account..! </h1>
                     <p className='text-xl my-3'><small>Welcome!! create your account to continue..</small></p>
@@ -74,7 +75,7 @@ const Register = () => {
                         <div className="mt-5">
                             <form onSubmit={handelFormSubmit}>
                                 <div className="relative mt-6">
-                                    <input type="text" name="name" placeholder="Full Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                                    <input type="text" name="name" required placeholder="Full Name" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
                                     <label htmlFor="name" className="pointer-events-none absolute top-0 left-0 origin-left -translate-y-1/2 transform text-sm text-gray-800 opacity-75 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 peer-focus:top-0 peer-focus:pl-0 peer-focus:text-sm peer-focus:text-gray-800">Full Name</label>
                                 </div>
                                 <div className="relative mt-6">

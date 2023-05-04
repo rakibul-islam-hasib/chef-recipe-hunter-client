@@ -10,9 +10,11 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const redirect = location?.state?.from || '/';
+    const [error, setError] = useState('');
     
     const [loading, setLoading] = useState(false);
     const handelFormSubmit = e => {
+        setError('');
         setLoading(true);
         e.preventDefault();
         let form = e.target;
@@ -20,38 +22,48 @@ const Login = () => {
         let password = form.password.value;
         login(email, password)
             .then(result => {
-                console.log(result.user);
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err.code)
+                // Error code to a message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
                 setLoading(false);
             })
     }
     const handelGoogleLogin = () => {
+        setError('');
         setLoading(true);
         googleLogin()
             .then(result => {
-                // console.log(result.user);
+                // Replace the current location with the redirect location
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err.code)
+                // Make error code to a  message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
                 setLoading(false);
             })
     }
     const githubLoginHandler = () => {
         setLoading(true);
+        setError('');
         githubLogin()
             .then(result => {
-                // console.log(result.user);
+                // Replace the current location with the redirect location
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err.code)
+                // Make error code to a  message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
                 setLoading(false);
             })
     }
@@ -78,7 +90,7 @@ const Login = () => {
                     <div className="w-full">
                         <div className="text-center">
                             <h1 className="text-3xl font-semibold text-gray-900">Sign in</h1>
-                            <p className="mt-2 text-gray-500">Sign in below to access your account</p>
+                            <p className={`mt-2 ${error ? 'text-red-500' : 'text-gray-500'}`}>{error ? error : 'Sign in below to access your account'}</p>
                         </div>
                         <div className="mt-5">
                             <form onSubmit={handelFormSubmit}>

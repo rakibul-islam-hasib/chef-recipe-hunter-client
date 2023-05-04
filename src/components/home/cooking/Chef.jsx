@@ -15,7 +15,7 @@ const Chef = () => {
     }, [])
     return (
         <div className='my-20'>
-            <h1 className='text-5xl font-bold text-center'>Simple and tasty recipes</h1>
+            <h1 className='text-5xl font-bold text-center uppercase'>Simple and tasty recipes <span className='text-primary block'>BY Our chef</span></h1>
             <div className="w-[70%] mx-auto text-center my-4">
                 <p>Simple and tasty recipes are dishes that are easy to prepare and have a delicious taste. They are ideal for individuals with busy schedules or those who are new to cooking.</p>
             </div>

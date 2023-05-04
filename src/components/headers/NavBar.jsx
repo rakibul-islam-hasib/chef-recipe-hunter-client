@@ -69,6 +69,7 @@ const NavBar = () => {
                         <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={item.url}>{item.label}</NavLink>
                     </li>)}
                     <li className=''>
+                        {/* If user = true then showing  the photo on navbar  */}
                         {user ?
                             <div className="flex items-center gap-6">
                                 {user?.photoURL ? (

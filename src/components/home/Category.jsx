@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Tilt } from 'react-tilt'
-
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const defaultOptions = {
     reverse: false,  // reverse the tilt direction
@@ -31,6 +32,7 @@ const Category = () => {
                 <h1 className='text-3xl font-semibold'>Categories</h1>
                 <button className='bg-primary px-5 py-2 rounded-full font-bold'>View All Categories</button>
             </div>
+            {/* Category Card Section */}
             <div className="grid mb-10 gap-6 md:grid-cols-3 sm:grid-cols-1 lg:grid-cols-6">
                 {
                     categoryData.map((data, index) => (
@@ -39,7 +41,8 @@ const Category = () => {
                             className='flex hover:-translate-y-1 flex-col justify-center items-center rounded-lg py-5 hover:shadow-xl transition duration-150 ease-in-out hover:text-primary cursor-pointer'
                             key={index}
                         >
-                            <img className='w-[50%]' src={data.image} alt='' />
+                            {/* <img className='w-[50%]' src={data.image} alt='' /> */}
+                            <LazyLoadImage delayTime={10000} className='w-[50%] mx-auto' src={data.image} effect='blur' alt=''/>
                             <h1 className='text-xl font-semibold mt-3'>{data.title}</h1>
                         </Tilt>
                     ))

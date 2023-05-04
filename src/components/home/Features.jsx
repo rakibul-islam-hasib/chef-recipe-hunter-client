@@ -37,7 +37,8 @@ const Features = () => {
                 <div className="flex flex-wrap -m-4 text-center">
                     {
                         data.map(item => <div key={item.id} className="p-4 md:w-1/4 sm:w-1/2 w-full">
-                            <div className="border-2 border-primary cursor-pointer px-4 py-6 rounded-lg transform transition duration-300 hover:scale-105">
+                            {/* Mouse right click disabled */}
+                            <div onContextMenu={(e)=>e.preventDefault()} className="border-2 border-primary cursor-pointer px-4 py-6 rounded-lg transform transition duration-300 hover:scale-105">
 
                                 <img src={item.icon} alt="" className="w-12 h-12 mb-3 inline-block" />
                                 <h2 className="title-font font-medium text-3xl text-gray-900">{item.count}</h2>

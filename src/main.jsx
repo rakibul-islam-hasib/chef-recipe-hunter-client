@@ -12,6 +12,7 @@ import 'react-tooltip/dist/react-tooltip.css'
 import Privet from './hooks/Privet.jsx'
 import ErrorPage from './components/pages/shared/ErrorPage.jsx'
 import Recipes from './components/pages/Recipes.jsx'
+import Chef from './components/home/cooking/Chef.jsx'
 // import 'sweetalert2/src/sweetalert2.scss'
 const router = createBrowserRouter([
   {
@@ -22,7 +23,8 @@ const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      {path : 'chef/:id', element : <Privet><Recipes /></Privet>}
+      {path : 'chef/:id', element : <Privet><Recipes /></Privet>},
+      { path: 'recipes', element: <Chef />}
     ]
   }
 ])
