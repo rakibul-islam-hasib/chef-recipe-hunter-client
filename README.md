@@ -15,6 +15,7 @@
 * Privet Route 
 * React Tooltip
 * Swiper JS slider
+* 2 extra  section added : Feature Card , Our Category 
 
 ### Live Link 
 https://amber-chef.web.app
