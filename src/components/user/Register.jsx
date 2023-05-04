@@ -8,12 +8,13 @@ import { FadeLoader } from 'react-spinners'
 
 const Register = () => {
     const [error, setError] = useState('');
-    const { register , update , user } = useContext(AuthContext);
-    
+    const { register, update, user } = useContext(AuthContext);
+
     const location = useLocation();
     const redirect = location?.state?.from || '/';
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [errCode, setErrCode] = useState('');
     const handelFormSubmit = e => {
         setLoading(true);
         e.preventDefault();
@@ -23,7 +24,7 @@ const Register = () => {
         let email = form.email.value;
         let photo = form.photo.value;
         let password = form.password.value;
-        if (password.length < 6) {
+        if (password.length <= 6) {
             setError('Password must be at least 6 characters long');
             setLoading(false);
             return;
@@ -31,19 +32,21 @@ const Register = () => {
         register(email, password)
             .then(result => {
                 // console.log(result.user);
-                update(photo, name).then(()=>{})
-                .catch(err=>console.log(err.code))
+                update(photo, name).then(() => { })
+                    .catch(err => console.log(err))
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
             .catch(err => {
-                console.log(err)
-                setError(err.code);
+                // error code to message
+                let errs = err.code.split('/')[1].split('-').join(' ');
+                // console.log(errs)
+                setError(errs);
                 setLoading(false);
             })
     }
-    if(user){
-        return <Navigate to="/" replace state={{from : location.pathname}} />;
+    if (user) {
+        return <Navigate to="/" replace state={{ from: location.pathname }} />;
     }
     return (
         loading ? <div className="h-screen flex justify-center items-center">
@@ -70,7 +73,8 @@ const Register = () => {
                     <div className="w-full">
                         <div className="text-center">
                             <h1 className="text-3xl font-semibold text-gray-900">Register</h1>
-                            <p className="mt-2 text-red-500">{error}</p>
+                            {error && <p className="mt-2 text-red-500">{error}</p>}
+
                         </div>
                         <div className="mt-5">
                             <form onSubmit={handelFormSubmit}>

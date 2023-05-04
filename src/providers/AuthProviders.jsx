@@ -11,24 +11,32 @@ const AuthProviders = ({ children }) => {
     const auth = getAuth(app);
     const register = (email, password) => {
         setLoader(true);
-        return createUserWithEmailAndPassword(auth, email, password);
+        return createUserWithEmailAndPassword(auth, email, password)
+        .catch((error) => {
+            setLoader(false);
+            throw error;
+        });
     }
     const update = (photo_url, name) => {
         return updateProfile(auth.currentUser, { photoURL: photo_url, displayName: name  })
     }
     // login with email and password
     const login = (email, password) => {
+        setLoader(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
     let googleProvider = new GoogleAuthProvider();
     const googleLogin = () => {
+        setLoader(true);
         return signInWithPopup(auth, googleProvider);
     }
     const githubProvider = new GithubAuthProvider();
     const githubLogin = () => {
+        setLoader(true);
         return signInWithPopup(auth, githubProvider);
     }
     const logOut = ()=> { 
+        setLoader(true);
         return signOut(auth);
     }
     useEffect(() => {

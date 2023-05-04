@@ -8,7 +8,7 @@ const Blog = () => {
     const ref = createRef();
 
     return (
-        <div className=''>
+        <div ref={ref} className=''>
             <div style={{ backgroundImage: `url(${blogImg})` }} className="h-[60vh] bg-cover flex justify-center items-center">
                 <div className="h-[60vh] flex justify-center items-center bg-black bg-opacity-75 w-full">
                     <h1 className='text-5xl font-bold text-white font-sans uppercase inline-flex items-center'>blog <FcTimeline /></h1>
@@ -25,7 +25,7 @@ const Blog = () => {
                 </Pdf>
             </div>
             {/* All Blog Post Here  */}
-            <div ref={ref} className="">
+            <div  className="">
                 <TimeLine />
             </div>
 

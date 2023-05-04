@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Hero2 from '../headers/Hero2';
 import Hero3 from '../headers/Hero3';
+import NewsLetter from './NewsLetter';
 const Home = () => {
     return (
         <>
@@ -37,15 +38,10 @@ const Home = () => {
             <div className="my-14">
                 <ChefAbout />
             </div>
-            <div className="">
                 <Features />
-            </div>
-            <div className="">
                 <Chef />
-            </div>
-            <div className="">
                 <Category />
-            </div>
+                <NewsLetter />
         </>
     );
 };
