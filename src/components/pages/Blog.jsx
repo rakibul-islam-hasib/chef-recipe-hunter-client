@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import blogImg from '../../assets/blog.jpg'
+import Pdf from "react-to-pdf";
 import { FcTimeline } from 'react-icons/fc';
 import TimeLine from './shared/TimeLine';
-import Accordion from './shared/Accordion';
+
 const Blog = () => {
+    const ref = createRef();
+
     return (
         <div className=''>
             <div style={{ backgroundImage: `url(${blogImg})` }} className="h-[60vh] bg-cover flex justify-center items-center">
                 <div className="h-[60vh] flex justify-center items-center bg-black bg-opacity-75 w-full">
-                    <h1 className='text-5xl font-bold text-white font-sans uppercase inline-flex items-center'>blog <FcTimeline/></h1>
+                    <h1 className='text-5xl font-bold text-white font-sans uppercase inline-flex items-center'>blog <FcTimeline /></h1>
                 </div>
             </div>
+            {/* Download PDF */}
+            <div className="flex justify-center items-center mt-8">
+                
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                    {({ toPdf }) =><button onClick={toPdf} className='px-9 py-4 bg-primary font-bold text-white rounded-full'>Download PDF</button>}
+                </Pdf>
+            </div>
             {/* All Blog Post Here  */}
-            <TimeLine />
-            {/* <Accordion /> */}
+            <div ref={ref} className="">
+                <TimeLine />
+            </div>
+
         </div>
     );
 };
