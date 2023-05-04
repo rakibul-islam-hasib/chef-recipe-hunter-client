@@ -43,7 +43,7 @@ const TimeLine = () => {
                                 icon={<img className='' src={item.icon} />}
                                 key={item.id}
                             >
-                                <h3 className="vertical-timeline-element-title font-bold">{item.title}</h3>
+                                <h3 className="vertical-timeline-element-title text-black font-bold">{item.title}</h3>
                                 <p>
                                     {item.description}
                                 </p>

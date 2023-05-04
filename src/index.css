@@ -10,3 +10,12 @@ body {
     @apply text-red-500 ; 
     
 }
+.swiper-pagination-bullet-active {
+    @apply bg-primary !important; 
+}
+.swiper-button-prev { 
+    @apply text-primary !important; 
+}
+.swiper-button-next { 
+    @apply text-primary !important;
+}
