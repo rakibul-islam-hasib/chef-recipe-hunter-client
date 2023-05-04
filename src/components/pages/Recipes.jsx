@@ -15,7 +15,7 @@ const Recipes = () => {
 
 
     useEffect(() => {
-        fetch(`https://amber-chef-codewithhasib.vercel.app/api/chefs/${id}`)
+        fetch(`https://amber-chef.vercel.app/api/chefs/${id}`)
             .then(res => res.json())
             .then(data => setChef(data))
             .catch(err => console.log(err))

@@ -17,7 +17,7 @@ const defaultOptions = {
 const Category = () => {
     const [categoryData, setCategoryData] = useState([]);
     useEffect(() => {
-        fetch('https://amber-chef-codewithhasib.vercel.app/api/category')
+        fetch('https://amber-chef.vercel.app/api/category')
             .then(res => res.json())
             .then(data => setCategoryData(data))
             .catch(err => console.log(err))

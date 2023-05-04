@@ -8,7 +8,7 @@ const Chef = () => {
     const [chefData, setChefData] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('https://amber-chef-codewithhasib.vercel.app/api/chefs')
+        fetch('https://amber-chef.vercel.app/api/chefs')
             .then(res => res.json())
             .then(data => setChefData(data))
             .catch(err => console.log(err))
