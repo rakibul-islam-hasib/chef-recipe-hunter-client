@@ -102,7 +102,7 @@ const Recipes = () => {
                                                 </ul>
                                                 <span className='block font-bold'>Instructions</span>
                                             </span>
-                                            <div className='block mt-auto'>{recipe?.instructions}</div>
+                                            <div className='block mb-6 mt-auto'>{recipe?.instructions}</div>
                                         </div>
                                         <div className="absolute mt-5 bottom-1">
                                             <div className="flex justify-between items-center">
@@ -111,6 +111,7 @@ const Recipes = () => {
                                                         count={5}
                                                         value={ratings}
                                                         size={24}
+                                                        edit={false}
                                                     />
                                                 </span>
                                                 <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
