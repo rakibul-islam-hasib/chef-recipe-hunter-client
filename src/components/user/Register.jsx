@@ -8,7 +8,7 @@ import { FadeLoader } from 'react-spinners'
 
 const Register = () => {
     const [error, setError] = useState('');
-    const { register, update, user } = useContext(AuthContext);
+    const { register, update, user , googleLogin  , githubLogin} = useContext(AuthContext);
 
     const location = useLocation();
     const redirect = location?.state?.from || '/';
@@ -24,7 +24,7 @@ const Register = () => {
         let email = form.email.value;
         let photo = form.photo.value;
         let password = form.password.value;
-        if (password.length <= 6) {
+        if (password.length < 6) {
             setError('Password must be at least 6 characters long');
             setLoading(false);
             return;
@@ -45,6 +45,40 @@ const Register = () => {
                 setLoading(false);
             })
     }
+    const githubLoginHandler = () => {
+        setLoading(true);
+        setError('');
+        githubLogin()
+            .then(result => {
+                // Replace the current location with the redirect location
+                navigate(redirect, { replace: true });
+                setLoading(false);
+            })
+            .catch(err => {
+                // Make error code to a  message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
+                setLoading(false);
+            })
+    }
+    const handelGoogleLogin = () => {
+        setError('');
+        setLoading(true);
+        googleLogin()
+            .then(result => {
+                // Replace the current location with the redirect location
+                navigate(redirect, { replace: true });
+                setLoading(false);
+            })
+            .catch(err => {
+                // Make error code to a  message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
+                setLoading(false);
+            })
+    }
     if (user) {
         return <Navigate to="/" replace state={{ from: location.pathname }} />;
     }
@@ -58,11 +92,13 @@ const Register = () => {
                     <p className='text-xl my-3'><small>Welcome!! create your account to continue..</small></p>
                     <div className="">
                         <button
+                            onClick={handelGoogleLogin}
                             className="px-4 py-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
                             <img className="w-6 h-6" src={google} loading="lazy" alt="" />
                             <span className='font-semibold'>Continue with Google</span>
                         </button>
                         <button
+                            onClick={githubLoginHandler}
                             className="px-4 py-2 mt-2 border flex gap-2 border-slate-200 rounded-lg text-slate-700 hover:border-slate-400 hover:text-slate-900 hover:shadow transition duration-150">
                             <img className="w-6 h-6" src={github} loading="lazy" alt="" />
                             <span className='font-semibold'>Continue with Github</span>
