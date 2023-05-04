@@ -2,6 +2,7 @@ import React from 'react';
 import blogImg from '../../assets/blog.jpg'
 import { FcTimeline } from 'react-icons/fc';
 import TimeLine from './shared/TimeLine';
+import Accordion from './shared/Accordion';
 const Blog = () => {
     return (
         <div className=''>
@@ -10,7 +11,9 @@ const Blog = () => {
                     <h1 className='text-5xl font-bold text-white font-sans uppercase inline-flex items-center'>blog <FcTimeline/></h1>
                 </div>
             </div>
+            {/* All Blog Post Here  */}
             <TimeLine />
+            {/* <Accordion /> */}
         </div>
     );
 };
