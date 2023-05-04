@@ -74,10 +74,11 @@ const NavBar = () => {
                             <div className="flex items-center gap-6">
                                 {user?.photoURL ? (
                                     <img
+                                        onClick={() => navigate('/user/profile')}
                                         data-tooltip-variant="success"
                                         data-tooltip-id="my-tooltip"
                                         data-tooltip-content={user?.displayName}
-                                        className="w-10 h-10 rounded-full"
+                                        className="w-10 h-10 cursor-pointer rounded-full"
                                         src={user?.photoURL}
                                         alt=""
                                     />
@@ -125,7 +126,7 @@ const NavBar = () => {
                 }
             </div>
             <div className={`${isOpen ? 'block top-[72px]' :'hidden'} duration-1000 -top-[100px] absolute`}>
-                <ul className={`md:hidden mx-auto w-screen h-screen bg-black  flex flex-col items-center justify-center gap-4`}>
+                <ul className={`md:hidden w-screen h-screen bg-black  flex flex-col items-center justify-center gap-4`}>
                     {navbarData.map((item, index) => <li key={index} className='font-bold hover:text-red-500 duration-300'>
                         <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={item.url}>{item.label}</NavLink>
                     </li>)}
