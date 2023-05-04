@@ -14,7 +14,7 @@ import ErrorPage from './components/pages/shared/ErrorPage.jsx'
 import Recipes from './components/pages/Recipes.jsx'
 import Chef from './components/home/cooking/Chef.jsx'
 import Blog from './components/pages/Blog.jsx'
-// import 'sweetalert2/src/sweetalert2.scss'
+import Profile from './components/user/Profile.jsx'
 const router = createBrowserRouter([
   {
     path: '/',
@@ -26,7 +26,8 @@ const router = createBrowserRouter([
       { path: 'register', element: <Register /> },
       {path : 'chef/:id', element : <Privet><Recipes /></Privet>},
       { path: 'recipes', element: <Chef />}, 
-      {path:'blog',element: <Blog />}
+      {path:'blog',element: <Blog />},
+      {path: 'user/profile' , element : <Privet><Profile /></Privet>}
     ]
   }
 ])
