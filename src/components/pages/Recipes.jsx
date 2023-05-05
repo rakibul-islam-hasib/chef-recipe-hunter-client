@@ -8,6 +8,7 @@ import ReactStars from "react-rating-stars-component";
 import {toast} from 'react-hot-toast';
 
 const Recipes = () => {
+    document.title = 'Recipes - Amber Chefs';
     const { id } = useParams();
     const [chef, setChef] = useState({});
     const [favorite, setFavorite] = useState(false);

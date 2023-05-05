@@ -4,6 +4,7 @@ import Footer from './Footer';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../headers/NavBar';
 const ErrorPage = () => {
+    document.title = 'Error Page Not Found - Amber Chefs';
     const navigate = useNavigate(); 
     return (
         <div className='relative'>
