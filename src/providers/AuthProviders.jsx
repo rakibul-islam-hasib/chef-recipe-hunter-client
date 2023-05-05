@@ -8,22 +8,38 @@ export const AuthContext = createContext(null); // Create a context object
 const AuthProviders = ({ children }) => {
     const [loader, setLoader] = useState(true);
     const [user, setUser] = useState(null); // [1]
+    const [error, setError] = useState(null); // Add error state
+
     const auth = getAuth(app);
-    const register = (email, password) => {
+    const register = async (email, password) => {
         setLoader(true);
-        return createUserWithEmailAndPassword(auth, email, password)
-        .catch((error) => {
+        try {
+            return await createUserWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            setLoader(false);
+            setError(error); // Update error state
+            throw error;
+        }
+    }
+    const update = async (photo_url, name) => {
+        setLoader(true);
+        try {
+            return await updateProfile(auth.currentUser, { photoURL: photo_url, displayName: name });
+        } catch (error) {
             setLoader(false);
             throw error;
-        });
-    }
-    const update = (photo_url, name) => {
-        return updateProfile(auth.currentUser, { photoURL: photo_url, displayName: name  })
+        }
     }
     // login with email and password
-    const login = (email, password) => {
+    const login = async (email, password) => {
         setLoader(true);
-        return signInWithEmailAndPassword(auth, email, password);
+        try {
+            return await signInWithEmailAndPassword(auth, email, password);
+        } catch (error) {
+            setLoader(false);
+            setError(error.code); // Update error state
+            throw error;
+        }
     }
     let googleProvider = new GoogleAuthProvider();
     const googleLogin = () => {
@@ -51,7 +67,8 @@ const AuthProviders = ({ children }) => {
         })
         return () => unsubscribe();
     }, [])
-    const providerValue = { register, update, login, googleLogin, githubLogin , user , logOut}
+    // console.log(error)
+    const providerValue = { register, update, login, googleLogin, githubLogin , user , logOut , error}
     if (loader) {
         return <div className="h-screen flex justify-center items-center">
             <MoonLoader color="#36d7b7" />

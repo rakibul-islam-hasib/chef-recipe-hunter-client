@@ -84,6 +84,7 @@ const NavBar = () => {
                                     />
                                 ) : (
                                     <img
+                                        onClick={() => navigate('/user/profile')}
                                         data-tooltip-variant="success"
                                         data-tooltip-id="my-tooltip"
                                         data-tooltip-content={user?.displayName}
@@ -125,7 +126,7 @@ const NavBar = () => {
                     isOpen ? <MdClose className='text-3xl text-cyan-600' /> : <GiHamburgerMenu className='text-3xl text-cyan-600' />
                 }
             </div>
-            <div className={`${isOpen ? 'block top-[72px]' :'hidden'} duration-1000 -top-[100px] absolute`}>
+            <div className={`${isOpen ? 'block top-[72px]' : 'hidden'} duration-1000 -top-[100px] absolute`}>
                 <ul className={`md:hidden w-screen h-screen bg-black  flex flex-col items-center justify-center gap-4`}>
                     {navbarData.map((item, index) => <li key={index} className='font-bold hover:text-red-500 duration-300'>
                         <NavLink className={({ isActive }) => isActive ? 'active-link' : ''} to={item.url}>{item.label}</NavLink>
@@ -180,7 +181,7 @@ const NavBar = () => {
                     </li>
                 </ul>
             </div>
-            <Tooltip float={true} place='bottom' id="my-tooltip" />
+            <Tooltip delayShow={100} float={true} place='bottom' id="my-tooltip" />
         </div >
     );
 };

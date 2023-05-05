@@ -1,72 +1,86 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import google from '../../assets/search.png';
 import github from '../../assets/github.png';
 import { AuthContext } from '../../providers/AuthProviders';
-import { FadeLoader } from 'react-spinners'
+import { FadeLoader } from 'react-spinners';
 
 const Login = () => {
-    const { login, googleLogin, githubLogin } = useContext(AuthContext);
+    const { login, googleLogin, githubLogin, error } = useContext(AuthContext);
     const location = useLocation();
     const navigate = useNavigate();
     const redirect = location?.state?.from || '/';
-    const [error, setError] = useState('');
-    
+    const [errorFN, setError] = useState('');
+    const [errorHandler, setErrorHandler] = useState('');
     const [loading, setLoading] = useState(false);
-    const handelFormSubmit = e => {
+
+    useEffect(() => {
+        if (error) {
+            const msg = error.split('/')[1].split('-').join(' ');
+            setErrorHandler(msg);
+        }
+    }, [error]);
+
+    const handelFormSubmit = async (e) => {
         setError('');
         setLoading(true);
         e.preventDefault();
         let form = e.target;
         let email = form.email.value;
         let password = form.password.value;
-        login(email, password)
-            .then(result => {
-                navigate(redirect, { replace: true });
-                setLoading(false);
-            })
-            .catch(err => {
+        try {
+            await login(email, password);
+            navigate(redirect, { replace: true });
+        } catch (err) {
+            if (err) {
                 // Error code to a message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
                 setError(msg);
-                setLoading(false);
-            })
-    }
+                // console.log(msg)
+            } else {
+                setError('An error occurred');
+                console.log(err);
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
+    console.log(errorHandler);
     const handelGoogleLogin = () => {
         setError('');
         setLoading(true);
         googleLogin()
-            .then(result => {
+            .then((result) => {
                 // Replace the current location with the redirect location
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
-            .catch(err => {
+            .catch((err) => {
                 // Make error code to a  message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
                 setError(msg);
                 setLoading(false);
-            })
-    }
+            });
+    };
     const githubLoginHandler = () => {
         setLoading(true);
         setError('');
         githubLogin()
-            .then(result => {
+            .then((result) => {
                 // Replace the current location with the redirect location
                 navigate(redirect, { replace: true });
                 setLoading(false);
             })
-            .catch(err => {
+            .catch((err) => {
                 // Make error code to a  message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
                 setError(msg);
                 setLoading(false);
-            })
-    }
+            });
+    };
     return (
         loading ? <div className="h-screen flex justify-center items-center">
             <FadeLoader color="#36d7b7" />
@@ -90,7 +104,7 @@ const Login = () => {
                     <div className="w-full">
                         <div className="text-center">
                             <h1 className="text-3xl font-semibold text-gray-900">Sign in</h1>
-                            <p className={`mt-2 ${error ? 'text-red-500' : 'text-gray-500'}`}>{error ? error : 'Sign in below to access your account'}</p>
+                            <p className={`mt-2 ${errorHandler ? 'text-red-500' : 'text-gray-500'}`}>{errorHandler ? errorHandler : 'Sign in below to access your account'}</p>
                         </div>
                         <div className="mt-5">
                             <form onSubmit={handelFormSubmit}>
