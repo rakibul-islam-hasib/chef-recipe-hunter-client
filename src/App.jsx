@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import NavBar from './components/headers/NavBar';
 import { Outlet, useLocation } from 'react-router-dom';
 import Scroll from './hooks/scroll';
 import Footer from './components/pages/shared/Footer';
 import { Toaster } from 'react-hot-toast';
+import { AuthContext } from './providers/AuthProviders';
+import { MoonLoader } from 'react-spinners';
 const App = () => {
+  const { loader } = useContext(AuthContext);
   const [navBackground, setNavBackground] = useState('bg-[#5A6169]'); // Initial background color of the nav element
   const location = useLocation();
   const [isLogin, setIsLogin] = useState(false);
@@ -30,6 +33,11 @@ const App = () => {
       window.removeEventListener('scroll', handleScroll); // Remove the scroll event listener when the component unmounts
     };
   }, []);
+  if (loader) {
+    return <div className="h-screen flex justify-center items-center">
+      <MoonLoader color="#36d7b7" />
+    </div>
+  }
   return (
     <div className='relative'>
       <div className={`${navBackground} ${isLogin && 'bg-black'} z-20 fixed top-0 w-full`}>
@@ -39,10 +47,10 @@ const App = () => {
         <Outlet />
       </div>
       <div className="w-full">
-        <Footer /> 
+        <Footer />
       </div>
-      <Scroll /> 
-      <Toaster /> 
+      <Scroll />
+      <Toaster />
     </div>
   );
 };

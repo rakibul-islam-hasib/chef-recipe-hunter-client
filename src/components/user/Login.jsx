@@ -46,7 +46,6 @@ const Login = () => {
             setLoading(false);
         }
     };
-    console.log(errorHandler);
     const handelGoogleLogin = () => {
         setError('');
         setLoading(true);

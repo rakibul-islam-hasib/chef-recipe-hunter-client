@@ -14,6 +14,7 @@ import Hero2 from '../headers/Hero2';
 import Hero3 from '../headers/Hero3';
 import NewsLetter from './NewsLetter';
 const Home = () => {
+    document.title = 'Home - Amber Chefs';
     return (
         <>
             <div style={{ backgroundImage: `url(${bgImg})` }} className="h-screen  bg-fixed bg-cover">

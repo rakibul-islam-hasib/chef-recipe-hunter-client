@@ -11,20 +11,24 @@ const AuthProviders = ({ children }) => {
     const [error, setError] = useState(null); // Add error state
 
     const auth = getAuth(app);
-    const register = async (email, password) => {
+    const register =  async (email, password) => {
         setLoader(true);
-        try {
-            return await createUserWithEmailAndPassword(auth, email, password);
-        } catch (error) {
+        try{
+           return await createUserWithEmailAndPassword(auth, email, password);
+        }catch(error){
             setLoader(false);
-            setError(error); // Update error state
             throw error;
         }
-    }
+    };
+    
+
+    
     const update = async (photo_url, name) => {
         setLoader(true);
         try {
-            return await updateProfile(auth.currentUser, { photoURL: photo_url, displayName: name });
+            const userCredential =  await updateProfile(auth.currentUser, { photoURL: photo_url, displayName: name });
+            setLoader(false);
+            return userCredential;
         } catch (error) {
             setLoader(false);
             throw error;
@@ -51,29 +55,21 @@ const AuthProviders = ({ children }) => {
         setLoader(true);
         return signInWithPopup(auth, githubProvider);
     }
-    const logOut = ()=> { 
+    const logOut = () => {
         setLoader(true);
         return signOut(auth);
     }
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, user => {
-            // console.log(user)
-            if (user) {
-                setUser(user);
-            } else {
-                setUser(null);
-            }
+            setUser(user);
             setLoader(false);
         })
         return () => unsubscribe();
     }, [])
     // console.log(error)
-    const providerValue = { register, update, login, googleLogin, githubLogin , user , logOut , error}
-    if (loader) {
-        return <div className="h-screen flex justify-center items-center">
-            <MoonLoader color="#36d7b7" />
-        </div>
-    }
+    console.log(loader, 'provider loader')
+    const providerValue = { register, update, login, googleLogin, githubLogin, user, logOut,  loader }
+    
     return (
         <AuthContext.Provider value={providerValue}>
             {children}

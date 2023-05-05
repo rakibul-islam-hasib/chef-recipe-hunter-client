@@ -26,6 +26,7 @@ const Recipes = () => {
     };
     // console.log(chef)
     const { name, img, num_recipes, years_of_experience, likes, recipes, description, verify } = chef;
+    document.title = `${name} - Amber Chefs`;
     return (
         <>
             <div className="h-screen">

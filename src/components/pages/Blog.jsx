@@ -5,6 +5,7 @@ import { FcTimeline } from 'react-icons/fc';
 import TimeLine from './shared/TimeLine';
 
 const Blog = () => {
+    document.title = 'Blog - Amber Chefs';
     const ref = createRef();
 
     return (

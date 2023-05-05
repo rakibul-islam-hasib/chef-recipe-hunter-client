@@ -7,15 +7,15 @@ import { FadeLoader } from 'react-spinners'
 
 
 const Register = () => {
+    document.title = 'Register - Amber Chefs';
     const [error, setError] = useState('');
-    const { register, update, user , googleLogin  , githubLogin} = useContext(AuthContext);
+    const { register, update, user, googleLogin, githubLogin } = useContext(AuthContext);
 
     const location = useLocation();
     const redirect = location?.state?.from || '/';
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [errCode, setErrCode] = useState('');
-    const handelFormSubmit = e => {
+    const handelFormSubmit = async e => {
         setLoading(true);
         e.preventDefault();
         setError('');
@@ -29,22 +29,26 @@ const Register = () => {
             setLoading(false);
             return;
         }
-        register(email, password)
-            .then(result => {
-                // console.log(result.user);
-                update(photo, name).then(() => { })
-                    .catch(err => console.log(err))
-                navigate(redirect, { replace: true });
-                setLoading(false);
-            })
-            .catch(err => {
-                // error code to message
-                let errs = err.code.split('/')[1].split('-').join(' ');
-                // console.log(errs)
-                setError(errs);
-                setLoading(false);
-            })
+        try {
+            await register(email, password);
+            await update(photo, name);
+            setLoading(false);
+            navigate(redirect, { replace: true });
+        } catch (err) {
+            if (err) {
+                // Error code to a message
+                const errorCode = err.code;
+                const msg = errorCode.split('/')[1].split('-').join(' ');
+                setError(msg);
+                // console.log(msg)
+            } else {
+                setError('An error occurred');
+                console.log(err);
+            }
+            setLoading(false);
+        }
     }
+    console.log(loading, 'register loading')
     const githubLoginHandler = () => {
         setLoading(true);
         setError('');
