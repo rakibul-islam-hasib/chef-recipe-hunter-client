@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { app } from '../firebase/firebase.init';
-import { MoonLoader } from 'react-spinners'
+import { FadeLoader, MoonLoader } from 'react-spinners'
 
 
 export const AuthContext = createContext(null); // Create a context object
@@ -9,7 +9,6 @@ const AuthProviders = ({ children }) => {
     const [loader, setLoader] = useState(true);
     const [user, setUser] = useState(null); // [1]
     const [error, setError] = useState(null); // Add error state
-
     const auth = getAuth(app);
     const register =  async (email, password) => {
         setLoader(true);
@@ -66,9 +65,14 @@ const AuthProviders = ({ children }) => {
         })
         return () => unsubscribe();
     }, [])
-    // console.log(error)
-    console.log(loader, 'provider loader')
-    const providerValue = { register, update, login, googleLogin, githubLogin, user, logOut,  loader }
+    const providerValue = { register, update, login, googleLogin, githubLogin, user, logOut,  loader  , error }
+    if (loader) {
+        return (
+            <div className="flex h-screen justify-center items-center" style={{ height: '100vh' }}>
+                <FadeLoader  color="#36d7b7" />
+            </div>
+        )
+    }
     
     return (
         <AuthContext.Provider value={providerValue}>

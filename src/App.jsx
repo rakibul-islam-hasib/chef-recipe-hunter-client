@@ -33,11 +33,6 @@ const App = () => {
       window.removeEventListener('scroll', handleScroll); // Remove the scroll event listener when the component unmounts
     };
   }, []);
-  if (loader) {
-    return <div className="h-screen flex justify-center items-center">
-      <MoonLoader color="#36d7b7" />
-    </div>
-  }
   return (
     <div className='relative'>
       <div className={`${navBackground} ${isLogin && 'bg-black'} z-20 fixed top-0 w-full`}>

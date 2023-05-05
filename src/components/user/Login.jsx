@@ -10,7 +10,6 @@ const Login = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const redirect = location?.state?.from || '/';
-    const [errorFN, setError] = useState('');
     const [errorHandler, setErrorHandler] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -20,9 +19,7 @@ const Login = () => {
             setErrorHandler(msg);
         }
     }, [error]);
-
     const handelFormSubmit = async (e) => {
-        setError('');
         setLoading(true);
         e.preventDefault();
         let form = e.target;
@@ -36,10 +33,7 @@ const Login = () => {
                 // Error code to a message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
-                setError(msg);
-                // console.log(msg)
             } else {
-                setError('An error occurred');
                 console.log(err);
             }
         } finally {
@@ -47,7 +41,6 @@ const Login = () => {
         }
     };
     const handelGoogleLogin = () => {
-        setError('');
         setLoading(true);
         googleLogin()
             .then((result) => {
@@ -59,13 +52,11 @@ const Login = () => {
                 // Make error code to a  message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
-                setError(msg);
                 setLoading(false);
             });
     };
     const githubLoginHandler = () => {
         setLoading(true);
-        setError('');
         githubLogin()
             .then((result) => {
                 // Replace the current location with the redirect location
@@ -76,7 +67,6 @@ const Login = () => {
                 // Make error code to a  message
                 const errorCode = err.code;
                 const msg = errorCode.split('/')[1].split('-').join(' ');
-                setError(msg);
                 setLoading(false);
             });
     };
