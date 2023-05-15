@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoad } from 'react-lazyload';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 const Chef = () => {
     const [chefData, setChefData] = useState([]);
+    const navigate = useNavigate();
     useEffect(() => {
-        fetch('data.json')
+        fetch('https://amber-chef.vercel.app/api/chefs')
             .then(res => res.json())
             .then(data => setChefData(data))
             .catch(err => console.log(err))
@@ -18,12 +24,15 @@ const Chef = () => {
                     chefData.map((data, i) => <div
                         key={i}
                         style={{ background: 'linear-gradient(180deg, rgba(231, 249, 253, 0) 0%, #E7F9FD 100%)' }}
-                        className="p-4  max-w-lg border cursor-pointer border-indigo-300 rounded-2xl  duration-100 flex flex-col items-center"
+                        className="p-4 hover:-translate-y-2 max-w-lg border cursor-pointer border-indigo-300 rounded-2xl hover:shadow-xl duration-100 flex flex-col items-center"
                     >
-
-                        <img src={data.img}
-                            className="shadow h-[200px] w-full rounded-lg overflow-hidden border" />
-
+                        {/* <img src={data.img} className="shadow h-[200px] w-full rounded-lg overflow-hidden border" /> */}
+                        <LazyLoadImage
+                            delayTime={10000}
+                            effect='blur'
+                            src={data.img}
+                            className="shadow h-[200px] w-full rounded-lg overflow-hidden border" /> 
+                     
 
 
                         <div className="mt-auto">
@@ -46,6 +55,7 @@ const Chef = () => {
                             </div>
                             <div className="mt-5 flex justify-center">
                                 <button
+                                    onClick={() => navigate(`/chef/${data._id}`)}
                                     type="button"
                                     className="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-3 py-2 text-sm font-medium leading-4 text-white shadow-sm hover:bg-gray-900"> View Recipes</button>
                             </div>
